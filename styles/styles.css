@@ -1,0 +1,30 @@
+p{
+    font-weight: bold;
+    font-size: px;
+    }
+
+#top{
+    text-decoration: underline;
+}
+
+.emphasizedText{
+    font-size: italic;
+    color:gray;
+}
+
+body{
+    background-color: whitesmoke;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    border: 5px solid black;
+    margin: 20px;
+    padding: 10px;
+}
+
+.centered-list{
+    padding-left: 0;
+    list-style-position: outside;
+    margin: 0 auto;
+    display: table ;
+    text-align: left;
+}
