@@ -5,70 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
     <style>
+        /* General Styles */
         body {
-            background: #0b0b0b;
-            color: gold;
-            font-family: Arial, sans-serif;
+            background-color: #228B22; /* Casino green table color */
+            color: #f8f8f2; /* Light text for contrast */
+            font-family: 'Arial', sans-serif;
             text-align: center;
             margin: 0;
             padding: 20px;
         }
-        h1 { margin-bottom: 10px; }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px black; /* Subtle shadow for depth */
+            color: #ffd700; /* Gold color for the title */
+        }
+
         #game {
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent black for contrast */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            max-width: 800px;
+            margin: 0 auto;
         }
+
         .cards {
             display: flex;
             gap: 10px;
             justify-content: center;
             margin: 10px 0;
         }
+
         .card {
-            width: 60px;
-            height: 90px;
+            width: 80px;
+            height: 120px;
             border-radius: 8px;
-            background: white;
-            color: black;
+            background: #ffffff; /* White card background */
+            color: black; /* Black text for card values */
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease;
+            position: relative;
         }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid black;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
         .controls button {
             margin: 5px;
             padding: 10px 20px;
             border: none;
-            border-radius: 8px;
-            background: gold;
-            color: #0b0b0b;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffcc00, #ff9900); /* Casino chip-like buttons */
+            color: black;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
+
         .controls button:hover {
             transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
         }
-        .status, .betting {
-            margin: 15px 0;
+
+        .betting button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #ffcc00, #ff9900); /* Gold gradient */
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
-        input[type='number'] {
-            padding: 5px;
-            border-radius: 5px;
-            border: 1px solid #555;
-            width: 60px;
+
+        .betting button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px black;
         }
     </style>
 </head>
 <body>
 <h1>Blackjack</h1>
+
 <div class="navigation" style="margin-bottom: 20px;">
     <button onclick="location.href='index.html'">Home</button>
-    <button onclick="location.href='rules.html'">Rules</button>
-    <button onclick="location.href='highscores.html'">High Scores</button>
 </div>
 
 <div id="game">
@@ -88,7 +137,7 @@
     <div class="controls">
         <button onclick="hit()">Hit</button>
         <button onclick="stand()">Stand</button>
-        <button onclick="resetGame()">Reset Game</button>
+        <button onclick="resetGame()">Next Hand</button>
     </div>
     <div class="status">Balance: $<span id="balance">1000</span></div>
 </div>
@@ -128,15 +177,22 @@ function dealCard(hand) {
 }
 
 function updateDisplay() {
+    // Display the player's cards
     document.getElementById('playerCards').innerHTML = playerHand.map(c => `<div class='card'>${c.value}${c.suit}</div>`).join('');
     
-    // Hide second dealer card until player stands
+    // Display the dealer's cards
     if (gameOver) {
+        // Show all dealer cards when the game is over
         document.getElementById('dealerCards').innerHTML = dealerHand.map(c => `<div class='card'>${c.value}${c.suit}</div>`).join('');
-    } else {
+    } else if (dealerHand.length > 0) {
+        // Show only the first dealer card and hide the second
         document.getElementById('dealerCards').innerHTML = `<div class='card'>${dealerHand[0].value}${dealerHand[0].suit}</div><div class='card'>?</div>`;
+    } else {
+        // If no cards have been dealt yet, show two hidden cards
+        document.getElementById('dealerCards').innerHTML = `<div class='card'>?</div><div class='card'>?</div>`;
     }
 
+    // Update the balance display
     document.getElementById('balance').innerText = balance;
 }
 
@@ -149,14 +205,16 @@ function startGame() {
     playerHand = [];
     dealerHand = [];
 
+    // Deal initial cards
     dealCard(playerHand);
     dealCard(dealerHand);
     dealCard(playerHand);
     dealCard(dealerHand);
 
-    updateDisplay();
-    document.getElementById('status').innerText = "Your move!";
+    // Set game state and update display
     gameOver = false; // Allow actions
+    document.getElementById('status').innerText = "Your move!";
+    updateDisplay(); // Ensure the display is updated immediately
 }
 
 function hit() {
@@ -168,6 +226,8 @@ function hit() {
 }
 
 function stand() {
+    if (gameOver) return; // Prevent further actions after the game ends
+
     gameOver = true;
     while (handValue(dealerHand) < 17) {
         dealCard(dealerHand);
@@ -201,13 +261,14 @@ function endGame() {
 }
 
 function resetGame() {
-    balance = 1000;
     playerHand = [];
     dealerHand = [];
     document.getElementById('status').innerText = "Place your bet!";
+    gameOver = true; // Prevent actions until "Deal" is clicked
     updateDisplay();
 }
 
+// Initialize the game with no cards
 resetGame();
 </script>
 </body>

@@ -7,31 +7,11 @@
     <link rel="stylesheet" href="mystyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        #imageSlider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        #sliderImage {
+        img {
+            display: block;
+            margin: 20px auto;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        .arrow-button {
-            background: gold;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-            color: black;
-            transition: transform 0.2s ease, background 0.3s ease;
-        }
-        .arrow-button:hover {
-            transform: scale(1.1);
-            background: #ffd700;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -44,36 +24,32 @@
 
     <div class="section" id="intro">
         <h1>My BYU Journey</h1>
-        <p>Studying Information Systems at BYU has been an amazing experience!</p>
-        <div id="imageSlider">
-            <button class="arrow-button" onclick="prevImage()">&#8592;</button>
-            <img id="sliderImage" src="../images/1-17/2.jpg" alt="BYU Campus" width="300">
-            <button class="arrow-button" onclick="nextImage()">&#8594;</button>
-        </div>
+        <p>Studying Business at BYU has been an amazing experience!</p>
+        <img src="../images/1-17/2.jpg" alt="BYU Campus" width="300">
     </div>
 
     <div class="section">
         <h2>Memorable Experiences</h2>
         <ol>
-            <li>Classes and Projects
+            <li>Exploring different places
                 <ul>
-                    <li>Database Design</li>
-                    <li>Web Development</li>
-                    <li>VBA Automation</li>
+                    <li>Shooting the tube</li>
+                    <li>Different hikes</li>
+                    <li>Looking at the Moonlight Market</li>
                 </ul>
             </li>
-            <li>Friends and Activities</li>
-            <li>Spiritual Growth</li>
+            <li>Game nights</li>
+            <li>Movie nights</li>
         </ol>
     </div>
 
     <div class="section">
         <h2 id="anchor">Favorite Part</h2>
-        <p>My favorite part has been combining tech learning with real-life projects.</p>
+        <p>My favorite part, by far, has been the random adventures we take really late into the night. Normally, we don't really know where we are going until we are actually getting in the car.</p>
     </div>
 
     <div class="section">
-        <h2>Check Out This Video</h2>
+        <h2>Shooting the tube</h2>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/W0Hzl_KCX2k" frameborder="0" allowfullscreen></iframe>
     </div>
 
@@ -81,20 +57,5 @@
         <h2>Interactive Tableau Graph</h2>
         <iframe src="https://public.tableau.com/views/WebTrafficDashboardRedesign/Cockpit" width="800" height="600"></iframe>
     </div>
-
-    <script>
-        let currentImage = 2; // Start from image 2
-        function showImage() {
-            document.getElementById('sliderImage').src = `../images/1-17/${currentImage}.jpg`;
-        }
-        function nextImage() {
-            currentImage = currentImage < 17 ? currentImage + 1 : 2; // Loop back to image 2 after 17
-            showImage();
-        }
-        function prevImage() {
-            currentImage = currentImage > 2 ? currentImage - 1 : 17; // Loop back to image 17 before image 2
-            showImage();
-        }
-    </script>
 </body>
 </html>

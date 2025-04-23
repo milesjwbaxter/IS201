@@ -52,7 +52,7 @@
         .section-title {
             font-size: 2rem;
             font-weight: 600;
-            color: #333;
+            color: #0073e6; /* Accent color for the "Résumé" heading */
             margin-bottom: 20px;
         }
         .lead {
@@ -69,6 +69,14 @@
         .bottom-space {
             margin-bottom: 60px; /* Ensure content doesn't get cut off by footer */
         }
+        h1.display-4 {
+            color: #343a40; /* Dark gray for a professional look */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        p.lead {
+            font-size: 1.25rem; /* Slightly larger font for readability */
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -77,23 +85,24 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" href="scratch.html">My College Experience</a></li>
-            <li class="nav-item"><a class="nav-link" href="#resume">Résumé</a></li>
         </ul>
     </div>
 </nav>
 
+<div class="container mt-5 text-center">
+    <h1 class="display-4 fw-bold">Welcome to My Professional Page</h1>
+    <p class="lead text-muted">This site showcases my journey and skills as a student.</p>
+    <hr class="my-4" style="border-top: 2px solid #343a40; width: 50%; margin: 20px auto;">
+    <h2 class="section-title mt-4">Résumé</h2>
+</div>
+
 <div class="container mt-5">
-    <h1 class="display-4 text-center">Welcome to My Professional Page</h1>
-    <p class="lead text-center">This site showcases my journey and skills as a student at BYU-Idaho.</p>
-
     <section id="resume" class="resume-section mt-5">
-        <h2 class="section-title text-center">Résumé</h2>
-
         <div class="resume-container">
             <div class="row">
                 <div class="col-md-6">
                     <h5>Education</h5>
-                    <p>BYU-Idaho, IS Major</p>
+                    <p>Current BYU student, studying business</p>
                 </div>
                 <div class="col-md-6">
                     <h5>Work Experience</h5>
@@ -121,6 +130,21 @@
                 <div class="col-md-6">
                     <h5>References</h5>
                     <ul>
-                        <li><strong>Soli Owens</strong> – Peer Mentor | 📞 469-999-4407</li>
-                        <li><strong>Emiliano Medina</strong> – Peer Mentor | 📧 med23014@byui.edu</li>
-                        <li><strong>Douglas Irey</strong> – Carpet Crew Supervisor | 📞 508-840-
+                        <li><strong>Soli Owens</strong> – Peer Mentor | 📞 469-999-xxxx</li>
+                        <li><strong>Emiliano Medina</strong> – Peer Mentor | 📧 med230xx@byui.edu</li>
+                        <li><strong>Douglas Irey</strong> – Carpet Crew Supervisor | 📞 508-840-xxxx
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+ <br><br>
+
+<div class="footer">
+    <p>&copy; 2023 Miles Baxter. All rights reserved.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
